@@ -1,0 +1,24 @@
+defmodule Navigator do def navigate(dir) do
+  @max_breadth 2
+  expanded_dir = Path.expand(dir)
+  go_through([expanded_dir],0)
+end
+#en el gothrough se agrega un argumento para el wide que qeuremos ir chequeando
+  defp go_through([],current_breadth), do: nil
+  #se le agrega stop condition para cuando nos pasamos del wide a buscar
+  defp go_through(list,current_breadth), when current_breadth > max_breadth do: nil
+#se agrega la guarda para chequear el current vs el max, y luego se suma 1 al wide cuando
+#vamos a ir por el resto del dir
+  defp go_through([content | rest],current_breadth) when current_breadth<=max_breadth do
+    print_and_navigate(content, File.dir?(content))
+    go_through(rest,current_breadth+1)
+  end
+  defp print_and_navigate(_dir, false), do: nil defp print_and_navigate(dir, true) do
+    IO.puts dir
+    children_dirs = File.ls!(dir)
+    go_through(expand_dirs(children_dirs, dir))
+  end
+  defp expand_dirs([], _relative_to), do: [] defp expand_dirs([dir | dirs], relative_to) do expanded_dir = Path.expand(dir, relative_to)
+    [expanded_dir | expand_dirs(dirs, relative_to)]
+  end
+end

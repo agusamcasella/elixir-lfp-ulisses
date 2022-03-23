@@ -1,0 +1,12 @@
+defmodule Factorial do
+  def of(0), do: 1
+
+  def of(n) when n > 0 do
+    1..10_000_000
+    |> Enum.take(n)
+    |> Enum.reduce(&(&1 * &2))
+  end
+end
+
+# usa una coleccion de numeros pero no los evalua todos enseguida,, igual cubre
+# unos cuantos casos pero no infinito,
