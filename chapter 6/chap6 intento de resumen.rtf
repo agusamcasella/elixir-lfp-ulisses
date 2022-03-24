@@ -1,0 +1,119 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+\f3\froman\fcharset0 Times-Italic;\f4\froman\fcharset0 Times-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red19\green0\blue125;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c9804\c6667\c56471;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14200\viewh16380\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Chapter 6 \'85 un proyect/app en mix\
+Mix es una herramienta CLI , que te ayuda a crear y mantener un proyecto de elixir. Provee tasks para compilar, debuguear, sestear y manejar dependencias y tu entorno.\
+\
+\
+\
+Para empezar la app/;proyecto corremos en consola     
+\f1\b mix new proyect_name
+\f0\b0 \
+El output muestra la base de la estructura de los directorios ara empezar con la aplicaci\'f3n.\
+Los m\'e1s relevantes son lib y test. El lib,,, es donde vas a poner el c\'f3digo de la aplicaci\'f3n.\
+Y el test es d\'f3nde vas a poner c\'f3digo que chequea lo que la aplicaci\'f3n tenga en lib este bien.\
+\
+Con mix test se corren los test de la app.\
+\'97\'97\
+
+\f1\b  use 
+\f0\b0 permite a otro modulo tomar acciones y utilizar c\'f3digo en el modulo que usa el 
+\f1\b use
+\f0\b0 .\
+\
+\'97\'97\
+\
+Creando la starter task\
+Mix tasks son commands que invocas desde la terminal que usa utilidades de mix, commands Como mix new y mix test son tareas de mix\
+Podemos crear una mix task construyendo un modulo en Mix.Tasks namespace agregando la directiva use Mix.Task \
+Lo primero\'85 agregar la estructura del directorio, es decir creas el start.ex dentro de carpeta tasks dentro de mix, y dentro de lib.\
+Luego de creado,,, defines un modulo carpetas.Start que dentro tenga un use Mix.Task y una funci\'f3n run(_), que luego veremos que le vamos a poner que haga.\
+\
+Con esto,, nos permitimos hacer mix start y que haga lo que la funci\'f3n run diga en el archivo start.ex b\'e1sicamente.\
+\
+\
+Ya luego empezamos a crear las entidades que vamos a necesitar en la app,,,, por ejemplo la entidad personaje o character,, que sera un archivo dentro de lib dentro de el nombre de la app,, un archivo character.ex , donde definiremos un modulo carpetas.Character, que tenga dentro un defstruct con las caracateristicas que necesite nuestra entidad.\
+\
+Para probar la inicializaci\'f3n y todo sobre el struct por ej,,, podemos tirar un 
+\f1\b iix -S mix 
+\f0\b0  pas\'e1ndole la flag -S le dice a iex que corra un script al iniciar, luego pas\'e1ndole mix carrera la tarea de mix del proyecto compilando y cargando los m\'f3dulos del proyecto. Entonces por ej hacemos algo as\'ed 
+\f2\fs21\fsmilli10667 \cf2 	.	\expnd0\expndtw0\kerning0
+warrior = %DungeonCrawl.Character\{
+\f3\i \cf3 name: "Warrior"
+\f2\i0 \cf2 \} 
+\fs24  y veremos la salida que tienes para ver que tal quedo el struct definido\
+\
+
+\f0 \cf0 \kerning1\expnd0\expndtw0  Luego podemos por ej, crear una lista de heroes par que nuestro player pueda elegir entre ellos,,,, creando un archivo heroes.ex dentro de la carpeta de lib y de la app\'85 que tendr\'eda algo as\'ed como un modulo app.Heroes,, donde tendr\'e1s un alias\
+\'97\'97\
+
+\f1\b alias 
+\f0\b0  lo que te deja hacer es abreviar algo ,,, por ej Todo el nombre de otro modulo,,, y as\'ed cada vez que lo tengas que llamar no tendr\'edas que poner todo el nombre completo 
+\f2\fs21\fsmilli10667 \cf2 \expnd0\expndtw0\kerning0
+alias DungeonCrawl.Character 
+\fs24 \'fanicamente lo puedes llamar con Character luego de esa linea.
+\f0 \cf0 \kerning1\expnd0\expndtw0 \
+\'97\'97\
+Y una funci\'f3n que sea all o todos, o algo del estilo para listar todos los heroes de la app, pero en este caso solamente los vas a definir,,,, entonces tendr\'edas en el ej del libro,,, una lista de maps,,, lo cual tiene en cada map un tipo de character .\
+\
+\
+Luego d eque tienes cierta base de entidades,,,deber\'edas de crear una carpeta para la interaccion con el player. Por ej,,, para listar los heroes,,, no haces una funcion que liste heroes,, sino que dentro de la cli que vas a crear,,, haces el listado de los heroes porq es una interaccion con el player b\'e1sicamente.\
+Para esto te creas un main.ex dentro de la carpeta cli, dentro e lib y dentro de la app,,,q ue sera  nuestro manejador,, del juego. Y ahi creas el modulo de main,,, que tenga un alias para la shell,, 
+\f2\fs21\fsmilli10667 \cf2 \expnd0\expndtw0\kerning0
+alias Mix.Shell.IO, 
+\f3\i \cf3 as: 
+\f2\i0 \cf2 Shell 
+\fs24 \
+
+\f0 Que te va a ayudar a abreviar el output de la consola para poder invocar a las funciones de output mas f\'e1cil.\
+Tambi\'e9n tienes que tener una funci\'f3n que sea start_game que haga lo que vaya a hacer el juego,,,y luego tienes que en el task de start de mix,,, cambiar la funci\'f3n de run para que corra la funci\'f3n de start_game del main,.\
+\
+Luego el programa corre con mix start en la consola\
+Para agregar por ej la funci\'f3n de selecci\'f3n de h\'e9roe,,, se agrega en la carpeta de cli,,, la cual es para las interacciones como dijimos, Entonces creas el modulo de HeroesChoice que tenga una funci\'f3n de start, que limpie la pantalla con 
+\f1\b Shell.cmd(\'93clear\'94)\
+
+\f0\b0 Esto es teniendo el alias de Mix.Shell.IO como dijimos antes. Y luego de imprimir en pantalla que elija un h\'e9roe,,, tendremos que listarlos,, para eso ponemos una variable heroes que se iguale a el all del modulo de los heroes creado antes\'85 y\
+Con esa variable  hacemos un Enum.map()\'85 y un display_op \
+La funci\'f3n de display la creas debajo,,, que lo que hace es,,, enumerar con index a lo que le das,,, y para cada uno una impresi\'f3n en la pantalla con el Enum.each() .. \
+ Pasado eso,, tienes que agregar en el mail,, la funci\'f3n de darle la h\'e9roe choice al player\'85 para eso,, creas una funci\'f3n que haga el start del heroes choice,, y la corred en el start_game en alg\'fan momento que le quieras dar la opci\'f3n de elegir h\'e9roe.\
+Para que sea mejor mantenible y consistente es que se hace esto,,,, la elecci\'f3n de los heroes la creas en otro namespace y lo usas desde el main\'85 por si se rompe la heroes choice sabes que main solamente la usa,, y vas hacia heroes choice a arreglarlo .\
+\
+\
+Para elegir un h\'e9roe,,/ elecci\'f3n del usuario\'85 tendremos que en el c\'f3digo de elecci\'f3n de los herede,, pedir procesar la respuesta con la shell y parsear la respuesta que nos da el usuario, luego buscamos el h\'e9roe en nuestra lista y le damos otra chance mas para confirmar como cualquier jueguito\'85.\
+Para estas cosas esta bueno el pipeline,,, porq te defines una primera entrada la transformas como quieras para la siguiente funci\'f3n y en la siguiente funci\'f3n que vayas a poner,,, pones un nombre y defines que hace la funci\'f3n mas abajo con el dato que le pasas.,.\
+\
+\
+\
+\
+Usar protocolos par crear funciones polimorfas\
+El protocol de elixir es un feature que permite crear una interfaz que varios datatypes puedan implementar. Seria como una interface de java\'85 haces defprotocol con su nombre como los m\'f3dulos,,, y luego,, dentro defines una funicion con argumentos o sin ellos pero que no tenga end ni body,..\
+Luego haces defimpl del modulo de protocolo y for el modulo que vaya a implementar la funci\'f3n,,, luego dentro de esto \
+Antes del end,,, que tenga la funci\'f3n pero implementada,, es decir el argumento va a tener un tipo y la funci\'f3n va a retornar algo.\
+\
+\
+\
+Creamos una acci\'f3n en un room de la dungeon,,, creamos el archivo action.ex en room entro de dungeon,,y podemos dentro un modulo  con un alias del modulo para abreviar,,, y  nos definimos un struct,, que tenga  una etiqueta e id,,, \
+Luego definimos 3 funciones ,,, que devolver\'e1n map de tipo action,, que tendr\'e1n un primer key id,,, con su valor correspondiente a la funci\'f3n,, y un segundo key label que sera de la manera que lo vas a. Mostrar en pantalla,,, \
+\
+\
+Heck la action del room,,, creams ahora un room\'85 donde  importaremos el modulo de action\'85 y definiremos un struct dentro del modulo de room,, para ponerle su descripci\'f3n y accionarial correspondiente a ese room\'85\
+Una funci\'f3n all,, que sea la lista de todos los maps de los rooms\
+\
+
+\f2 \
+Podemos usar 
+\f4\b refractoring
+\f2\b0  para reutilizar c\'f3digo basicamente,, por ej,, en cli,, creamos un archivo que sea base_commands,ex para poner ahi los comandos mas usados como,,, display options,,, generar question,,, parse_answer,,, entonces sera un modulo de base commands, que usara un alias para la shell,,, y las funciones de manera \'93general\'94,,, ej,,, definimos parsear respuesta, y que tome la respuesta del usuario y simplemente la parsee a integer. Seran reutilizables las funciones,,, recordar que para poder ser reutilizables definirlas con def,, y no defp\'85 as\'ed cuando las vas a usar por fuera con un import,, estas mismas se importen,, sino quedan por fuera por ser privadas.\
+\
+Al tener funciones de esta manera reutilizables,, los otros m\'f3dulos digamos que quedan mas simplificados,, por ej,, el de heroes choice,, usa de base comando display options,,, generate question y parseanswer,,\
+Enotnces estas mismas no van definidas en el heroeschoice.\
+\
+\
+\
+\
+}
