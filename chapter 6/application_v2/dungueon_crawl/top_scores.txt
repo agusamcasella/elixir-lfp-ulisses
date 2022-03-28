@@ -1,0 +1,8 @@
+Player_name: asd
+ Score: 0Player_name: asdasdasd
+ Score: 0
+Player_name: asd
+ Score: 0 holahola
+Player_name: asdasd
+ Score: 0 holahola
+Player_name: asdads Score: 0 holahola

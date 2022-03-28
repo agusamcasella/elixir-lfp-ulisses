@@ -10,28 +10,27 @@ defmodule DungeonCrawl.Room do
         description: "You can see the light of day. You found the exit!",
         actions: [forward()],
         trigger: Triggers.Exit,
-        chances: 0
-      },
-      %Room{
-        description: "You can see an enemy blocking your path.",
-        actions: [forward(), battle()],
-        trigger: Triggers.Enemy,
-
         chances: 10
       },
       %Room{
+        description: "You can see an enemy blocking your path.",
+        actions: [forward(), battle(), use_item()],
+        trigger: Triggers.Enemy,
+        chances: 0,
+      },
+      %Room{
         description: "You see a room full of rare chest.",
-        actions: [forward(),search()],
+        actions: [forward(),search(), use_item()],
         trigger: Triggers.Search,
 
-        chances: 3
+        chances: 0
       },
       %Room{
         description: "You see a secure room full of beds",
-        actions: [forward(), rest()],
+        actions: [forward(), rest(), use_item()],
         trigger: Triggers.Rest,
 
-        chances: 6
+        chances: 0
       }
     ]
   end

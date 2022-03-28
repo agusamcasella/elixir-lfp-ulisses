@@ -21,6 +21,10 @@ defmodule DungeonCrawl.Room.Action do
     %Action{id: :search, label: "Search the room for some treasure."}
   end
 
+  def use_item do
+    %Action{id: :use_item, label: "Use a potion from inventory if any, and move forward."}
+  end
+
   defimpl String.Chars do
     def to_string(action), do: action.label
   end

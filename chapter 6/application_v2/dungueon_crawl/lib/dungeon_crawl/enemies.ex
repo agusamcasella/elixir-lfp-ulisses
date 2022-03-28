@@ -9,7 +9,8 @@ defmodule DungeonCrawl.Enemies do
         hit_points: 12,
         max_hit_points: 12,
         damage_range: 3..5,
-        attack_description: "a hammer"
+        attack_description: "a hammer",
+        reward: 6
       },
       %Character{
         name: "Orc",
@@ -17,7 +18,8 @@ defmodule DungeonCrawl.Enemies do
         hit_points: 8,
         max_hit_points: 8,
         damage_range: 2..4,
-        attack_description: "an axe"
+        attack_description: "an axe",
+        reward: 3
       },
       %Character{
         name: "Goblin",
@@ -25,7 +27,8 @@ defmodule DungeonCrawl.Enemies do
         hit_points: 4,
         max_hit_points: 4,
         damage_range: 1..2,
-        attack_description: "a dagger"
+        attack_description: "a dagger",
+        reward: 1
       }
     ]
 end

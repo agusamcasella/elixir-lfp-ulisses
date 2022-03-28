@@ -3,10 +3,15 @@ defmodule DungeonCrawl.Room.Triggers.Rest do
 
 
   def run(character, %DungeonCrawl.Room.Action{id: :rest}) do
-    IO.inspect("Se helea*_ ")
+
     update_character = DungeonCrawl.Character.heal(character)
     {update_character, :rest}
     # {character, :ok}
+  end
+
+  def run(character, %DungeonCrawl.Room.Action{id: :use_item}) do
+    update_character = DungeonCrawl.Character.heal_potion(character)
+    {update_character, :use_item}
   end
 
   def run(character, %DungeonCrawl.Room.Action{id: :forward}) do

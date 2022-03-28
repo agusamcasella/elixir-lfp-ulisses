@@ -49,7 +49,7 @@ defmodule DungeonCrawl.CLI.HeroesChoice do
     #   %{ heroe | name: String.capitalize(name)}
     # IO.inspect(heroe)
 
-    Map.put(heroe, :usr_name, name) #crea un nuevo atributo en el map
+    Map.put(heroe, :usr_name, String.replace(name, "\n", "")) #crea un nuevo atributo en el map
       #{heroe,name} ##se devuelve el pj que selecciono el usuario.
     else
       start() #se comienza de nuevo con la eleccion de personaje si no le gusto su pj

@@ -1,0 +1,12 @@
+Discutimos las ventajas y desventajas de las 4 estrategias que vimos para manejar valores uncertain en las funciones.
+Funciones impuras pueden resultar en valores inesperados porque dependen de valores que no se encuentras en el scope de la funcion.. Ej, IO.gets() ..  o pedirle un valor al usuario de la manera que sea. 
+
+case,if,y otras estructura de control son buenas para manejar casos simples... combinando multiples condicionales produciremos codigo dificil de entender. DEBERIAS DE EVITARLO EN LO POSIBLE.
+
+El try,, funciona con librerias donde no controlas el cosido.. estas librerias pueden levantar o throwear errores. Funciones que retornan valores son simples y mas faciles de manejas que funciones que levantan erroes o throwean valores. Aun asi,,, deberias de evitar crear funciones que usen raise y throw.
+No necesitas aprender toda la teoria de los Moands, para empezar a usar Moands como Error.. Ayuda a generar codigo simpley facild eusar. Pero,, no es parte del ecosistema de elixir, es una libreria de comnunidad,,, entonces la busqueda de la libreria que le sirva a lo que tu team busca y necesita puede ser tediosa.
+
+El statement withes muy flexible para manejar valores inesperados gracias a pattern matchin. Es la estrategia por excelencia a usar para la mayoria de los casos.
+
+RECORDAR DE SEPARAR LAS FUNCIONES QUE MEZCLAN CASOS IMPUROS DE CASOS PUROS,,,,, o casos con side effects, y printear los mensajes en la terminal,... para el chap 6.
+No hay respuesta correcta, todo siempre queda a gusto personal para la cantidad de nivel de separacion que quieres entre funciones impuras de puras.
