@@ -9,3 +9,6 @@ def checkout() do
 end
 #En el else block podremos usar pattern mathin convencional  para los valores que no matchean en el bloque del with...
 #SI LOS VALORES NO MATCEHAN CON EL WITH NI CON EL ELSE,, ENTONCES SE LEVANTARA UN ERROR.
+
+
+

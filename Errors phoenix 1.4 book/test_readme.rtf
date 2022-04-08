@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Test para una app Phoenix elixir\'85 \
+  \
+ \
+ B\'e1sicamente, para crear un test definimos un modulo, con el nombre del Modulo O cosa que queramos testear +Test\'85 ej queremos testear contexto Multimedia,, cuyo nombre es Rumbl.Multimedia\
+			Nuestro test sera Rumbl.MultimediaTest \
+			Igual para controladores,, y dem\'e1s.\
+\
+Luego tendremos funcionalidades que nos ayudaran a preparar los datos para los test,, como por ej funciones que crean usuarios para ser utilizados dentro de los test.. para esto definimos en un test helare,, dentro de support en test_helper.ex,,, todas estas funciones,, en el ej definimos user_fixture,, y video_fixture, para crear usuario y video para los tests que los necesiten .\
+\
+Para cada test,,, Podemos poner una bandera async usand\'85 
+\f1\b use Rumbl.DataCase, async :true 
+\f0\b0 enseguida de definir el modulo para que los test se puedan correr en forma concurrente.\
+\
+Luego dentro de nuestros test,, podemos definir bloques describe para repartir seg\'fan que funcionalidades vamos a testear,, o que setups vamos a poner,, ej,,, si queremos que un describe teste solamente registro de usuario definiremos el 
+\f1\b describe \'93tests registro usuario\'94 do \{\'85.Tests\'85\} 
+\f0\b0 y dentro los test que prueben esa funcionalidad. ,, Cada test lleva un nombre que es un storing solamente para identificarse,, no sirve para nada mas por lo cual utilizar este string como una manera de reflejar y dejar bien claro que es lo que esta sesteando o que condiciones lleva el test que se esta testeando.\
+\
+Dentro de un bloque describe podemos definir el 
+\f1\b setup \{\} 
+\f0\b0  para definir un conjunto de condiciones que se van a cumplir para todos los test dentro del bloque describe \
+\
+Tambien podemos hacer uso de las variables de manera 
+\f1\b @varaible 
+\f0\b0  que al definirlas ser\'e1n variables globales dentro del archivo que se definan para utilizar cosas que vamos a usar en varios lugares y que nunca cambiaran de valores.\
+\
+Luego cada linea de los test,, sin ser aquellas que definan las condiciones o variables a utilizar,, ser\'e1n asserts,, para chequear que lo que se ponga del lado derecho del assert este en la condicon que tu quieres(el lado izquierdo),.. sea por pattern matching o,, chequear un boleado == true,, o una respuesta del servidor es 200 html,, o 302 html.. o que la conexi\'f3n se saltea,, par todo ese tipo de cosas la linea empezara con un assert,,, donde el lado izquierdo gralmentee sera lo que queremos,, y el lado derecho la funci\'f3n que vamos a utilizar para llegar a ese valor\'85. A grandes rasgos.\
+\
+\
+\
+\
+\
+ }
